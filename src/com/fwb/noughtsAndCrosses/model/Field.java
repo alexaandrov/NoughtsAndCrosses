@@ -2,7 +2,7 @@ package com.fwb.noughtsAndCrosses.model;
 
 public class Field {
 
-    private char field[][] = new char[3][3];
+    private static char field[][] = new char[3][3];
 
     private int l = 0;
 
@@ -28,11 +28,11 @@ public class Field {
         }
     }
 
-    public void putValue(char value) {
+    public void putValue(char value, char symbol) {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++) {
                 if (field[i][j] == value) {
-                    field[i][j] = 'x';
+                    field[i][j] = symbol;
                 }
             }
     }
