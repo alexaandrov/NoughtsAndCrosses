@@ -16,9 +16,6 @@ public class Main {
         System.out.println("\t\t***Welcome!***");
         field.showField();
         initializationGameAndPlayers(reader);
-
-
-
     }
 
 
