@@ -14,7 +14,7 @@ public class Field {
         createField();
     }
 
-    public void showField(
+    public void showField() {
         for(int lineNumber = MIN_FIELD_SIZE; lineNumber < FIELD_SIZE; lineNumber++) {
             for (int cellNumber = MIN_FIELD_SIZE; cellNumber < FIELD_SIZE; cellNumber++) {
                 System.out.print("[" + field[lineNumber][cellNumber] + "]");
