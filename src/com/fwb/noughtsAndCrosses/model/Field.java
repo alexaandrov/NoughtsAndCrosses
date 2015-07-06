@@ -2,37 +2,38 @@ package com.fwb.noughtsAndCrosses.model;
 
 public class Field {
 
-    private static final int FIELD_SIZE = 4;
+    private char field[][] = new char[3][3];
 
-    private static final int MIN_FIELD_SIZE = 1;
+    private int l = 0;
 
-    private static final char FIELD_CELL = '-';
-
-    private static char[][] field = new char[FIELD_SIZE][FIELD_SIZE];
-
-    Field() {
+    public Field() {
         createField();
     }
 
+    private void createField() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                field[i][j] = (char) (49 + l);
+                l++;
+            }
+        }
+    }
+
     public void showField() {
-        for(int lineNumber = MIN_FIELD_SIZE; lineNumber < FIELD_SIZE; lineNumber++) {
-            for (int cellNumber = MIN_FIELD_SIZE; cellNumber < FIELD_SIZE; cellNumber++) {
-                System.out.print("[" + field[lineNumber][cellNumber] + "]");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print("[" + field[i][j] + "]");
             }
             System.out.println();
         }
-        System.out.println();
     }
 
-    public void putValue(int lineNumber, int cellNumber, char value) {
-        field[lineNumber][cellNumber] = value;
-    }
-
-    private void createField() {
-        for(int lineNumber = MIN_FIELD_SIZE; lineNumber < FIELD_SIZE; lineNumber++) {
-            for(int cellNumber = MIN_FIELD_SIZE; cellNumber < FIELD_SIZE; cellNumber++) {
-                field[lineNumber][cellNumber] = FIELD_CELL;
+    public void putValue(char value) {
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++) {
+                if (field[i][j] == value) {
+                    field[i][j] = 'x';
+                }
             }
-        }
     }
 }
