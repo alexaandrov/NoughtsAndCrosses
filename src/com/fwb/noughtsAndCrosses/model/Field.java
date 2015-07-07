@@ -8,10 +8,9 @@ public class Field {
 
     public static final int MIN_FIELD_SIZE = 0;
 
-    private static int iterator = 0;
+    private static final int NUMBER_ONE_IN_THE_ASCII = 49;
 
-    private static int numberOneInTheChar = 49;
-
+    private int iterator = 0;
 
     public Field() {
         createField();
@@ -20,7 +19,7 @@ public class Field {
     private void createField() {
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
-                field[lineNumber][cellNumber] = (char) (numberOneInTheChar + iterator);
+                field[lineNumber][cellNumber] = (char) (NUMBER_ONE_IN_THE_ASCII + iterator);
                 iterator++;
             }
         }
@@ -33,6 +32,7 @@ public class Field {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public void putValue(char value, char symbol) {
