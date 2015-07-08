@@ -37,7 +37,8 @@ public class Game {
 
     public void startGame() throws IOException {
         for (int i = 0; i < 9; i++) {
-            selectPlayer().putValue(reader.scanInt(), fieldSymbol);
+            Player currentPlayer = selectPlayer();
+            currentPlayer.putValue(reader.scanInt(), fieldSymbol, currentPlayer);
             field.showField();
         }
     }

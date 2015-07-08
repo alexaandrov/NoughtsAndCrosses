@@ -43,10 +43,10 @@ public class Field {
         System.out.println();
     }
 
-    public void putValue(int value, char fieldSymbol) {
+    public void putValue(int value, char fieldSymbol, Player player) {
         if (value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) {
             while (value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) {
-                System.out.print( "Enter number again: ");
+                System.out.print(player.getPlayerName() + " enter number again: ");
                 value = reader.scanInt();
             }
             findAndPutValue(value, fieldSymbol);
