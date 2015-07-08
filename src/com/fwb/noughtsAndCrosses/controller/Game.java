@@ -3,7 +3,7 @@ package com.fwb.noughtsAndCrosses.controller;
 import java.io.IOException;
 import java.util.Random;
 import com.fwb.noughtsAndCrosses.model.Player;
-import com.fwb.noughtsAndCrosses.view.Reader;
+import com.fwb.noughtsAndCrosses.view.Input;
 import com.fwb.noughtsAndCrosses.model.Field;
 
 public class Game {
@@ -16,7 +16,7 @@ public class Game {
 
     private Random rand = new Random();
 
-    private Reader reader = new Reader();
+    private Input input = new Input();
 
     // разобраться с этим символом, и вообще перенести его в класс Field
     private char fieldSymbol = 'x';
@@ -38,7 +38,7 @@ public class Game {
     public void startGame() throws IOException {
         for (int i = 0; i < 9; i++) {
             Player currentPlayer = selectPlayer();
-            currentPlayer.putValue(reader.scanInt(), fieldSymbol, currentPlayer);
+            currentPlayer.putValue(input.scanInt(), fieldSymbol, currentPlayer);
             field.showField();
         }
     }

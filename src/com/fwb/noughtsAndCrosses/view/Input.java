@@ -4,7 +4,7 @@ import com.fwb.noughtsAndCrosses.model.Player;
 
 import java.util.Scanner;
 
-public class Reader {
+public class Input {
 
     Scanner scn = new Scanner(System.in);
 
