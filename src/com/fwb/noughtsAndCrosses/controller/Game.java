@@ -10,7 +10,7 @@ public class Game {
 
     private String gameName;
 
-    private int playersCount;
+    private final int playersCount;
 
     private Player[] players;
 
@@ -18,13 +18,15 @@ public class Game {
 
     private Reader reader = new Reader();
 
-    private char symbol = 'x';
+    // разобраться с этим символом, и вообще перенести его в класс Field
+    private char fieldSymbol = 'x';
 
-    private boolean step;
+    private int step;
 
     public Field field = new Field();
 
     public Game(String gameName, Player player1, Player player2) {
+        this.step = rand.nextInt(5000) % 2;
         this.gameName = gameName;
         this.playersCount = 2;
         players = new Player[playersCount];
@@ -35,7 +37,7 @@ public class Game {
 
     public void startGame() throws IOException {
         for (int i = 0; i < 9; i++) {
-            selectPlayer().putValue(reader.scanChar(), symbol);
+            selectPlayer().putValue(reader.scanInt(), fieldSymbol);
             field.showField();
         }
     }
@@ -45,13 +47,24 @@ public class Game {
     }
 
     private Player selectPlayer() {
-        if (rand.nextBoolean()) {
+        if (randStep()) {
             System.out.print(players[0].getPlayerName() + " enter number: ");
             return players[0];
         }
         else {
             System.out.print(players[1].getPlayerName() + " enter number: ");
             return players[1];
+        }
+    }
+
+    private boolean randStep() {
+        if (step == 1) {
+            step = 0;
+            return true;
+        }
+        else {
+            step = 1;
+            return false;
         }
     }
 

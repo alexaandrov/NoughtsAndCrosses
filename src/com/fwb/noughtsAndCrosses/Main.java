@@ -4,6 +4,7 @@ import java.io.IOException;
 import com.fwb.noughtsAndCrosses.controller.Game;
 import com.fwb.noughtsAndCrosses.view.Reader;
 
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
