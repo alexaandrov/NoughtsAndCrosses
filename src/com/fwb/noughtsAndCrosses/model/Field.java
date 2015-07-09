@@ -20,6 +20,10 @@ public class Field {
 
     private int iterator = 0;
 
+    private static int temp = 0;
+
+    private static int controlStepValue[] = new int[9];
+
     public Field() {
         createField();
     }
@@ -44,18 +48,21 @@ public class Field {
     }
 
     public void putValue(int value, char fieldSymbol, Player player) {
-        if (value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) {
-            while (value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) {
+        if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value == findControlStepValue(value)) {
+            while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value == findControlStepValue(value)) {
                 System.out.print(player.getPlayerName() + " enter number again: ");
                 value = input.scanInt();
             }
-            findAndPutValue(value, fieldSymbol);
+            findAndPutValue(value, fieldSymbol, player);
+            setControlStepValue(value);
         } else {
-            findAndPutValue(value, fieldSymbol);
+            System.out.println(findControlStepValue(value));
+            setControlStepValue(value);
+            findAndPutValue(value, fieldSymbol, player);
         }
     }
 
-    private void findAndPutValue(int value, char fieldSymbol) {
+    private void findAndPutValue(int value, char fieldSymbol, Player player) {
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
                 if (field[lineNumber][cellNumber] == NUMBER_ONE_IN_THE_ASCII - 1 + value) {
@@ -63,5 +70,22 @@ public class Field {
                 }
             }
         }
+    }
+
+    private void setControlStepValue(int value) {
+        controlStepValue[temp] = value;
+        temp++;
+    }
+
+    // Здесь ошибка где-то!
+    private int findControlStepValue(int number) {
+        int somethingNumber = 11;
+        for (int i = 0; i < 9; i++) {
+            if (controlStepValue[i] != number)
+               number = somethingNumber;
+            else
+                return number;
+        }
+        return number;
     }
 }
