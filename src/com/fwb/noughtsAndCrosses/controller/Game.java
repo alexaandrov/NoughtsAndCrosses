@@ -33,11 +33,12 @@ public class Game {
     }
 
     public void startGame() throws IOException {
-        for (int i = 0; i < 9; i++) {
+        while (!(field.Win())) {
             Player currentPlayer = selectPlayer();
             currentPlayer.putValue(input.scanInt(), currentPlayer);
             field.showField();
         }
+        System.out.println(field.searchWinner(players[0], players[1]));
     }
 
     private String getGameName() {

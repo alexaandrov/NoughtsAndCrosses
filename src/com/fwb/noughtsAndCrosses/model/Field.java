@@ -17,8 +17,6 @@ public class Field {
     private static final int MIN_FIELD_NUMBER = 1;
 
     private static final int MAX_FIELD_NUMBER = 9;
-    
-    private final char fieldSymbol = '-';
 
     private int iterator = 0;
 
@@ -86,5 +84,38 @@ public class Field {
             }
         }
         return number;
+    }
+
+    public boolean Win() {
+        for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
+            if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
+                return true;
+            else {
+                if ((field[0][i]) == field[1][i] && (field[0][i] == field[2][i]))
+                    return true;
+                else if (field[0][0] == field[1][1] && field[0][0] == field[2][2] || (field[0][2] == field[1][1] && field[0][2] == field[2][0]))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public String searchWinner(Player firstPlayer, Player secondPlayer) {
+        int firstPlayerCountSymbol = 0;
+        int secondPlayerCountSymbol = 0;
+        for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
+            for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
+                if(field[lineNumber][cellNumber] == firstPlayer.getFieldSymbol())
+                    firstPlayerCountSymbol++;
+                else secondPlayerCountSymbol++;
+            }
+        }
+        if (firstPlayerCountSymbol > secondPlayerCountSymbol) {
+            return "The winner is " + firstPlayer.getPlayerName();
+        }
+        else if (firstPlayerCountSymbol < secondPlayerCountSymbol) {
+            return "The winner is " + secondPlayer.getPlayerName();
+        }
+        return "The bad game";
     }
 }
