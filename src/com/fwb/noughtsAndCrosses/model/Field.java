@@ -17,6 +17,8 @@ public class Field {
     private static final int MIN_FIELD_NUMBER = 1;
 
     private static final int MAX_FIELD_NUMBER = 9;
+    
+    private final char fieldSymbol = '-';
 
     private int iterator = 0;
 
@@ -47,25 +49,25 @@ public class Field {
         System.out.println();
     }
 
-    public void putValue(int value, char fieldSymbol, Player player) {
+    public void putValue(int value, Player player) {
         if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
             while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
                 System.out.print(player.getPlayerName() + " enter number again: ");
                 value = input.scanInt();
             }
-            findAndPutValue(value, fieldSymbol, player);
+            findAndPutValue(value, player);
             setControlStepValue(value);
         } else {
             setControlStepValue(value);
-            findAndPutValue(value, fieldSymbol, player);
+            findAndPutValue(value, player);
         }
     }
 
-    private void findAndPutValue(int value, char fieldSymbol, Player player) {
+    private void findAndPutValue(int value, Player player) {
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
                 if (field[lineNumber][cellNumber] == NUMBER_ONE_IN_THE_ASCII - 1 + value) {
-                    field[lineNumber][cellNumber] = fieldSymbol;
+                    field[lineNumber][cellNumber] = player.getFieldSymbol();
                 }
             }
         }

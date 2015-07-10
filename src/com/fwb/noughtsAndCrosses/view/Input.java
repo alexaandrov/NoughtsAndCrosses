@@ -16,9 +16,9 @@ public class Input {
         return scn.nextLine();
     }
 
-    public Player scanPlayer() {
+    public Player scanPlayer(char symbol) {
         System.out.print("Enter the name of the player: ");
-        return new Player(scanString());
+        return new Player(scanString(), symbol);
     }
 //    public char scanChar() throws IOException{
 //    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -18,9 +18,6 @@ public class Game {
 
     private Input input = new Input();
 
-    // разобраться с этим символом, и вообще перенести его в класс Field
-    private char fieldSymbol = 'x';
-
     private int step;
 
     public Field field = new Field();
@@ -38,7 +35,7 @@ public class Game {
     public void startGame() throws IOException {
         for (int i = 0; i < 9; i++) {
             Player currentPlayer = selectPlayer();
-            currentPlayer.putValue(input.scanInt(), fieldSymbol, currentPlayer);
+            currentPlayer.putValue(input.scanInt(), currentPlayer);
             field.showField();
         }
     }
