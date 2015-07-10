@@ -48,15 +48,14 @@ public class Field {
     }
 
     public void putValue(int value, char fieldSymbol, Player player) {
-        if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value == findControlStepValue(value)) {
-            while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value == findControlStepValue(value)) {
+        if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
+            while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
                 System.out.print(player.getPlayerName() + " enter number again: ");
                 value = input.scanInt();
             }
             findAndPutValue(value, fieldSymbol, player);
             setControlStepValue(value);
         } else {
-            System.out.println(findControlStepValue(value));
             setControlStepValue(value);
             findAndPutValue(value, fieldSymbol, player);
         }
@@ -77,14 +76,12 @@ public class Field {
         temp++;
     }
 
-    // Здесь ошибка где-то!
     private int findControlStepValue(int number) {
         int somethingNumber = 11;
         for (int i = 0; i < 9; i++) {
-            if (controlStepValue[i] != number)
-               number = somethingNumber;
-            else
-                return number;
+            if (controlStepValue[i] == number) {
+                number = somethingNumber;
+            }
         }
         return number;
     }
