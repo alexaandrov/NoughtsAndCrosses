@@ -138,10 +138,14 @@ public class Field {
     }
 
     public String searchWinner(Player firstPlayer, Player secondPlayer) {
-        if (getWinnerChar() == firstPlayer.getFieldSymbol())
+        if (getWinnerChar() == firstPlayer.getFieldSymbol()) {
+            firstPlayer.putScore();
             return firstPlayer.getPlayerName();
-        else if (getWinnerChar() == secondPlayer.getFieldSymbol())
+        }
+        else if (getWinnerChar() == secondPlayer.getFieldSymbol()) {
+            secondPlayer.putScore();
             return secondPlayer.getPlayerName();
+        }
         else if (getWinnerChar() == '-')
             return "No winner";
         else

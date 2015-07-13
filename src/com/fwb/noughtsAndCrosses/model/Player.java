@@ -6,9 +6,12 @@ public class Player extends Field {
 
     private final char fieldSymbol;
 
+    private int score;
+
     public Player(String name, char fieldSymbol) {
         this.name = name;
         this.fieldSymbol = fieldSymbol;
+        score = 0;
     }
 
     public char getFieldSymbol() {
@@ -19,6 +22,11 @@ public class Player extends Field {
         return name;
     }
 
+    public int getScore() {
+        return score;
+    }
 
-
+    public void putScore() {
+        this.score++;
+    }
 }

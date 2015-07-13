@@ -32,6 +32,8 @@ public class Game {
 
     public void startGame() throws IOException {
         do {
+            showScore(1);
+            showScore(2);
             Field field = new Field();
             field.showField();
             while (!field.Win()) {
@@ -42,6 +44,10 @@ public class Game {
             System.out.println(field.searchWinner(players[0], players[1]) + " is win");
             System.out.println("Again, y or n: ");
         } while (input.scanChar() != 'n');
+    }
+
+    private void showScore(int n) {
+        System.out.println("Score -> " + players[n - 1].getPlayerName() + "(" + players[n - 1].getScore() + ")");
     }
 
     private String getGameName() {
@@ -69,7 +75,5 @@ public class Game {
             return false;
         }
     }
-
-
 }
 
