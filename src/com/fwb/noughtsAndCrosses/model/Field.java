@@ -86,9 +86,24 @@ public class Field {
         return number;
     }
 
+    private boolean checkNichya() {
+        char ch = field[0][0];
+        for (int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                if (ch == 'X' || ch == '0')
+                    ch = field[i][j];
+                else
+                    ch = '!';
+            }
+        return ch == 'X' || ch == '0';
+    }
+
     public boolean Win() {
         for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
-            if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
+            if (checkNichya()) {
+                return true;
+            }
+            else if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
                 return true;
             else {
                 if ((field[0][i]) == field[1][i] && (field[0][i] == field[2][i]))
@@ -100,22 +115,32 @@ public class Field {
         return false;
     }
 
-    public String searchWinner(Player firstPlayer, Player secondPlayer) {
-        int firstPlayerCountSymbol = 0;
-        int secondPlayerCountSymbol = 0;
-        for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
-            for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
-                if(field[lineNumber][cellNumber] == firstPlayer.getFieldSymbol())
-                    firstPlayerCountSymbol++;
-                else secondPlayerCountSymbol++;
+    private char getWinnerChar() {
+        for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
+            if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
+                return field[i][0];
+            else {
+                if ((field[0][i]) == field[1][i] && (field[0][i] == field[2][i]))
+                    return field[0][i];
+                else if (field[0][0] == field[1][1] && field[0][0] == field[2][2])
+                    return field[0][0];
+                else if (field[0][2] == field[1][1] && field[0][2] == field[2][0])
+                    return field[0][2];
+                else if (checkNichya())
+                    return '-';
             }
         }
-        if (firstPlayerCountSymbol > secondPlayerCountSymbol) {
-            return "The winner is " + firstPlayer.getPlayerName();
-        }
-        else if (firstPlayerCountSymbol < secondPlayerCountSymbol) {
-            return "The winner is " + secondPlayer.getPlayerName();
-        }
-        return "The bad game";
+        return 'j';
+    }
+
+    public String searchWinner(Player firstPlayer, Player secondPlayer) {
+        if (getWinnerChar() == firstPlayer.getFieldSymbol())
+            return firstPlayer.getPlayerName();
+        else if (getWinnerChar() == secondPlayer.getFieldSymbol())
+            return secondPlayer.getPlayerName();
+        else if (getWinnerChar() == '-')
+            return "No winner";
+        else
+            return "Game fail";
     }
 }

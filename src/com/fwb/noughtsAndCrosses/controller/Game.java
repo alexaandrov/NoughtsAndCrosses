@@ -33,12 +33,12 @@ public class Game {
     }
 
     public void startGame() throws IOException {
-        while (!(field.Win())) {
+        while (!field.Win()) {
             Player currentPlayer = selectPlayer();
             currentPlayer.putValue(input.scanInt(), currentPlayer);
             field.showField();
         }
-        System.out.println(field.searchWinner(players[0], players[1]));
+        System.out.println(field.searchWinner(players[0], players[1]) + " is win");
     }
 
     private String getGameName() {
