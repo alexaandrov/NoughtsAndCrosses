@@ -11,7 +11,8 @@ public class Main {
         Input input = new Input();
         System.out.println("\t\t***Welcome!***");
         Game game = new Game("Noughts and Crosses", input.scanPlayer('X'), input.scanPlayer('0'));
-        game.field.showField();
         game.startGame();
+        //System.out.println("You want play again: (y or n)");
+
     }
 }

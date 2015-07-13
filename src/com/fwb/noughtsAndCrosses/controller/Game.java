@@ -20,8 +20,6 @@ public class Game {
 
     private int step;
 
-    public Field field = new Field();
-
     public Game(String gameName, Player player1, Player player2) {
         this.step = rand.nextInt(5000) % 2;
         this.gameName = gameName;
@@ -33,12 +31,17 @@ public class Game {
     }
 
     public void startGame() throws IOException {
-        while (!field.Win()) {
-            Player currentPlayer = selectPlayer();
-            currentPlayer.putValue(input.scanInt(), currentPlayer);
+        do {
+            Field field = new Field();
             field.showField();
-        }
-        System.out.println(field.searchWinner(players[0], players[1]) + " is win");
+            while (!field.Win()) {
+                Player currentPlayer = selectPlayer();
+                currentPlayer.putValue(input.scanInt(), currentPlayer);
+                field.showField();
+            }
+            System.out.println(field.searchWinner(players[0], players[1]) + " is win");
+            System.out.println("Again, y or n: ");
+        } while (input.scanChar() != 'n');
     }
 
     private String getGameName() {

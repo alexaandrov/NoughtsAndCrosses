@@ -18,17 +18,20 @@ public class Field {
 
     private static final int MAX_FIELD_NUMBER = 9;
 
-    private int iterator = 0;
+    private static int temp;
 
-    private static int temp = 0;
+    private int iterator;
 
-    private static int controlStepValue[] = new int[9];
+    private static int[] controlStepValue;
 
     public Field() {
         createField();
+        temp = 0;
+        iterator = 0;
+        controlStepValue = new int[9];
     }
 
-    private void createField() {
+    public void createField() {
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
                 field[lineNumber][cellNumber] = (char) (NUMBER_ONE_IN_THE_ASCII + iterator);
@@ -76,28 +79,17 @@ public class Field {
         temp++;
     }
 
-    private int findControlStepValue(int number) {
+    private int findControlStepValue(int value) {
         int somethingNumber = 11;
         for (int i = 0; i < 9; i++) {
-            if (controlStepValue[i] == number) {
-                number = somethingNumber;
+            if (controlStepValue[i] == value) {
+                value = somethingNumber;
             }
         }
-        return number;
+        return value;
     }
 
-    private boolean checkNichya() {
-        char ch = field[0][0];
-        for (int i = 0; i < 3; i++)
-            for(int j = 0; j < 3; j++) {
-                if (ch == 'X' || ch == '0')
-                    ch = field[i][j];
-                else
-                    ch = '!';
-            }
-        return ch == 'X' || ch == '0';
-    }
-
+    /////////////////////////////////////////// WIN // что - то с ним сделать ///////////////////////////
     public boolean Win() {
         for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
             if (checkNichya()) {
@@ -113,6 +105,18 @@ public class Field {
             }
         }
         return false;
+    }
+
+    private boolean checkNichya() {
+        char ch = field[0][0];
+        for (int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                if (ch == 'X' || ch == '0')
+                    ch = field[i][j];
+                else
+                    ch = '!';
+            }
+        return ch == 'X' || ch == '0';
     }
 
     private char getWinnerChar() {

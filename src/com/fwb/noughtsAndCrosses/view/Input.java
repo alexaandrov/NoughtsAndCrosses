@@ -2,6 +2,9 @@ package com.fwb.noughtsAndCrosses.view;
 
 import com.fwb.noughtsAndCrosses.model.Player;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Input {
@@ -20,10 +23,10 @@ public class Input {
         System.out.print("Enter the name of the player: ");
         return new Player(scanString(), symbol);
     }
-//    public char scanChar() throws IOException{
-//    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//    return (char) br.read();
-//    }
+    public char scanChar() throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    return (char) br.read();
+    }
 
 
 
