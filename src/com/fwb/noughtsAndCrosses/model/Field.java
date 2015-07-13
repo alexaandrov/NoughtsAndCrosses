@@ -92,19 +92,49 @@ public class Field {
     /////////////////////////////////////////// WIN // что - то с ним сделать ///////////////////////////
     public boolean Win() {
         for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
-            if (checkNichya()) {
+            if (checkNichya())
                 return true;
-            }
             else if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
                 return true;
-            else {
-                if ((field[0][i]) == field[1][i] && (field[0][i] == field[2][i]))
+            else if ((field[0][i]) == field[1][i] && (field[0][i] == field[2][i]))
                     return true;
-                else if (field[0][0] == field[1][1] && field[0][0] == field[2][2] || (field[0][2] == field[1][1] && field[0][2] == field[2][0]))
+            else if (field[0][0] == field[1][1] && field[0][0] == field[2][2] || (field[0][2] == field[1][1] && field[0][2] == field[2][0]))
                     return true;
             }
-        }
         return false;
+    }
+
+    public String searchWinner(Player firstPlayer, Player secondPlayer) {
+        if (getWinnerSymbol() == firstPlayer.getFieldSymbol()) {
+            firstPlayer.putScore();
+            return firstPlayer.getPlayerName();
+        }
+        else if (getWinnerSymbol() == secondPlayer.getFieldSymbol()) {
+            secondPlayer.putScore();
+            return secondPlayer.getPlayerName();
+        }
+        else if (getWinnerSymbol() == '-')
+            return "No winner";
+        else if (getWinnerSymbol() == 'j') {
+            return "error";
+        }
+        return "Game fail";
+    }
+
+    private char getWinnerSymbol() {
+        for (int i = 0; i < 3; i++) {
+            if (field[i][0] == field[i][1] && field[i][0] == field[i][2])
+                return field[i][0];
+                else if (field[0][i] == field[1][i] && field[0][i] == field[2][i])
+                    return field[0][i];
+                else if (field[0][0] == field[1][1] && field[0][0] == field[2][2])
+                    return field[0][0];
+                else if (field[0][2] == field[1][1] && field[0][2] == field[2][0])
+                    return field[0][2];
+            }
+        if (checkNichya())
+            return '-';
+        return 'j';
     }
 
     private boolean checkNichya() {
@@ -117,38 +147,5 @@ public class Field {
                     ch = '!';
             }
         return ch == 'X' || ch == '0';
-    }
-
-    private char getWinnerChar() {
-        for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
-            if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
-                return field[i][0];
-            else {
-                if ((field[0][i]) == field[1][i] && (field[0][i] == field[2][i]))
-                    return field[0][i];
-                else if (field[0][0] == field[1][1] && field[0][0] == field[2][2])
-                    return field[0][0];
-                else if (field[0][2] == field[1][1] && field[0][2] == field[2][0])
-                    return field[0][2];
-                else if (checkNichya())
-                    return '-';
-            }
-        }
-        return 'j';
-    }
-
-    public String searchWinner(Player firstPlayer, Player secondPlayer) {
-        if (getWinnerChar() == firstPlayer.getFieldSymbol()) {
-            firstPlayer.putScore();
-            return firstPlayer.getPlayerName();
-        }
-        else if (getWinnerChar() == secondPlayer.getFieldSymbol()) {
-            secondPlayer.putScore();
-            return secondPlayer.getPlayerName();
-        }
-        else if (getWinnerChar() == '-')
-            return "No winner";
-        else
-            return "Game fail";
     }
 }
