@@ -28,6 +28,13 @@ public class ConsoleView {
     return (char) br.read();
     }
 
+    public void printLine(char Symbol, int length) {
+        int minLineLength = 0;
+        for (int i = minLineLength; i < length; i++) {
+            System.out.print(Symbol);
+        }
+        System.out.println();
+    }
 
 
 
