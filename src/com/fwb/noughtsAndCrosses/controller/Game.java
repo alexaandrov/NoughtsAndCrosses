@@ -12,11 +12,11 @@ public class Game {
 
     private final int playersCount;
 
-    private Player[] players;
+    private final Player[] players;
 
     private Random rand = new Random();
 
-    private ConsoleView consoleView = new ConsoleView();
+    private final ConsoleView consoleView = new ConsoleView();
 
     private int step;
 
