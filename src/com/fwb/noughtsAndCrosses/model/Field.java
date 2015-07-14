@@ -90,9 +90,9 @@ public class Field {
     }
 
     /////////////////////////////////////////// WIN // что - то с ним сделать ///////////////////////////
-    public boolean Win() {
+    public boolean Win(Player firstPlayer, Player secondPlayer) {
         for (int i = MIN_FIELD_SIZE; i < MAX_FIELD_SIZE; i++) {
-            if (checkNichya())
+            if (checkNichya(firstPlayer, secondPlayer))
                 return true;
             else if ((field[i][0] == field[i][1]) && (field[i][0] == field[i][2]))
                 return true;
@@ -105,23 +105,23 @@ public class Field {
     }
 
     public String searchWinner(Player firstPlayer, Player secondPlayer) {
-        if (getWinnerSymbol() == firstPlayer.getFieldSymbol()) {
+        if (getWinnerSymbol(firstPlayer, secondPlayer) == firstPlayer.getFieldSymbol()) {
             firstPlayer.putScore();
             return firstPlayer.getPlayerName();
         }
-        else if (getWinnerSymbol() == secondPlayer.getFieldSymbol()) {
+        else if (getWinnerSymbol(firstPlayer, secondPlayer) == secondPlayer.getFieldSymbol()) {
             secondPlayer.putScore();
             return secondPlayer.getPlayerName();
         }
-        else if (getWinnerSymbol() == '-')
+        else if (getWinnerSymbol(firstPlayer, secondPlayer) == '-')
             return "No winner";
-        else if (getWinnerSymbol() == 'j') {
+        else if (getWinnerSymbol(firstPlayer, secondPlayer) == 'j') {
             return "error";
         }
         return "Game fail";
     }
 
-    private char getWinnerSymbol() {
+    private char getWinnerSymbol(Player firstPlayer, Player secondPlayer) {
         for (int i = 0; i < 3; i++) {
             if (field[i][0] == field[i][1] && field[i][0] == field[i][2])
                 return field[i][0];
@@ -132,20 +132,20 @@ public class Field {
                 else if (field[0][2] == field[1][1] && field[0][2] == field[2][0])
                     return field[0][2];
             }
-        if (checkNichya())
+        if (checkNichya(firstPlayer, secondPlayer))
             return '-';
         return 'j';
     }
 
-    private boolean checkNichya() {
+    private boolean checkNichya(Player firstPlayer, Player secondPlayer) {
         char ch = field[0][0];
         for (int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++) {
-                if (ch == 'X' || ch == '0')
+                if (ch == firstPlayer.getFieldSymbol() || ch == secondPlayer.getFieldSymbol())
                     ch = field[i][j];
                 else
                     ch = '!';
             }
-        return ch == 'X' || ch == '0';
+        return ch == firstPlayer.getFieldSymbol() || ch == secondPlayer.getFieldSymbol();
     }
 }

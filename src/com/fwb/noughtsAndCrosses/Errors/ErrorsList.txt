@@ -1,1 +1,0 @@
-Error #1: 357198246 (show no winners, error) // fixed

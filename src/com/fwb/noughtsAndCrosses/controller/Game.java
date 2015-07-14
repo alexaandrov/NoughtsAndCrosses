@@ -36,7 +36,7 @@ public class Game {
             showScore(2);
             Field field = new Field();
             field.showField();
-            while (!field.Win()) {
+            while (!field.Win(players[0], players[1])) {
                 Player currentPlayer = selectPlayer();
                 currentPlayer.putValue(input.scanInt(), currentPlayer);
                 field.showField();
