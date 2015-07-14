@@ -21,13 +21,13 @@ public class Game {
     private int step;
 
     public Game(String gameName, Player player1, Player player2) {
-        this.step = rand.nextInt(5000) % 2;
         this.gameName = gameName;
         this.playersCount = 2;
         players = new Player[playersCount];
         this.players[0] = player1;
         this.players[1] = player2;
         System.out.println('\n' + players[0].getPlayerName() + " and " + players[1].getPlayerName() + " you are playing " + getGameName() + '\n');
+        this.step = rand.nextInt(playersCount) % playersCount;
     }
 
     public void startGame() throws IOException {
@@ -47,7 +47,8 @@ public class Game {
     }
 
     private void showScore(int n) {
-        System.out.println("Score -> " + players[n - 1].getPlayerName() + "(" + players[n - 1].getScore() + ")");
+        System.out.println(" Score -> " + players[n - 1].getPlayerName() + "(" + players[n - 1].getScore() + ")");
+        System.out.println("---------------");
     }
 
     private String getGameName() {
