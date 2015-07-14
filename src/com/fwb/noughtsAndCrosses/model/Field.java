@@ -1,10 +1,10 @@
 package com.fwb.noughtsAndCrosses.model;
 
-import com.fwb.noughtsAndCrosses.view.Input;
+import com.fwb.noughtsAndCrosses.view.ConsoleView;
 
 public class Field {
 
-    Input input = new Input();
+    ConsoleView consoleView = new ConsoleView();
 
     private static final int MAX_FIELD_SIZE = 3;
 
@@ -55,7 +55,7 @@ public class Field {
         if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
             while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
                 System.out.print(player.getPlayerName() + " enter number again: ");
-                value = input.scanInt();
+                value = consoleView.scanInt();
             }
             findAndPutValue(value, player);
             setControlStepValue(value);

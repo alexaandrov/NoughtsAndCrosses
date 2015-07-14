@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class Input {
+public class ConsoleView {
 
     Scanner scn = new Scanner(System.in);
 

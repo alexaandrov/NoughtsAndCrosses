@@ -3,7 +3,7 @@ package com.fwb.noughtsAndCrosses.controller;
 import java.io.IOException;
 import java.util.Random;
 import com.fwb.noughtsAndCrosses.model.Player;
-import com.fwb.noughtsAndCrosses.view.Input;
+import com.fwb.noughtsAndCrosses.view.ConsoleView;
 import com.fwb.noughtsAndCrosses.model.Field;
 
 public class Game {
@@ -16,7 +16,7 @@ public class Game {
 
     private Random rand = new Random();
 
-    private Input input = new Input();
+    private ConsoleView consoleView = new ConsoleView();
 
     private int step;
 
@@ -38,12 +38,13 @@ public class Game {
             field.showField();
             while (!field.Win(players[0], players[1])) {
                 Player currentPlayer = selectPlayer();
-                currentPlayer.putValue(input.scanInt(), currentPlayer);
+                currentPlayer.putValue(consoleView.scanInt(), currentPlayer);
                 field.showField();
             }
             System.out.println(field.searchWinner(players[0], players[1]) + " is win");
+            System.out.println("--------------");
             System.out.println("Again, y or n: ");
-        } while (input.scanChar() != 'n');
+        } while (consoleView.scanChar() != 'n');
     }
 
     private void showScore(int n) {
