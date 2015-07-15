@@ -55,9 +55,7 @@ public class Field {
         int value = consoleView.askPlayerCoordinate(player);
         if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
             while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
-                System.out.print(player.getPlayerName() + " enter number again: ");
-                value = consoleView.scanInt();
-                consoleView.printLine();
+                value = consoleView.askPlayerCoordinate(player);
             }
             findAndPutValue(value, player);
             setControlStepValue(value);
