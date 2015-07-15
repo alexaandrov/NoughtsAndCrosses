@@ -57,8 +57,8 @@ public class Field {
             while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
                 value = consoleView.askPlayerCoordinate(player);
             }
-            findAndPutValue(value, player);
             setControlStepValue(value);
+            findAndPutValue(value, player);
         } else {
             setControlStepValue(value);
             findAndPutValue(value, player);
