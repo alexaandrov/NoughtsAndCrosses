@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ConsoleView {
 
-    Scanner scn = new Scanner(System.in);
+    private Scanner scn = new Scanner(System.in);
 
     public int scanInt() {
         return scn.nextInt();
@@ -36,8 +36,4 @@ public class ConsoleView {
         System.out.print(player.getPlayerName() + " enter number: ");
         return scanInt();
     }
-
-
-
-
 }
