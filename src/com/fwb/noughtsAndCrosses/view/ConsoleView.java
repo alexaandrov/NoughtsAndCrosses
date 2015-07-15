@@ -32,6 +32,11 @@ public class ConsoleView {
         System.out.println("---------------");
     }
 
+    public int askPlayerCoordinate(Player player) {
+        System.out.print(player.getPlayerName() + " enter number: ");
+        return scanInt();
+    }
+
 
 
 
