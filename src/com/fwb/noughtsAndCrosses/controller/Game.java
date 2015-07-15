@@ -38,7 +38,7 @@ public class Game {
             field.showField();
             while (!field.Win(players[0], players[1])) {
                 Player currentPlayer = selectPlayer();
-                currentPlayer.putValue(consoleView.scanInt(), currentPlayer);
+                currentPlayer.putValue(currentPlayer);
                 field.showField();
             }
             System.out.println(field.searchWinner(players[0], players[1]) + " is win");
@@ -58,11 +58,9 @@ public class Game {
 
     private Player selectPlayer() {
         if (randStep()) {
-            System.out.print(players[0].getPlayerName() + " enter number: ");
             return players[0];
         }
         else {
-            System.out.print(players[1].getPlayerName() + " enter number: ");
             return players[1];
         }
     }
