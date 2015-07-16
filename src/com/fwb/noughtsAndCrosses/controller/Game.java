@@ -39,7 +39,7 @@ public class Game {
             field.showField();
             while (!winner.Win()) {
                 Player currentPlayer = selectPlayer();
-                currentPlayer.sendCoordinate(currentPlayer);
+                field.sendCoordinate(currentPlayer);
                 field.showField();
             }
             System.out.println(winner.searchWinner() + " is win");

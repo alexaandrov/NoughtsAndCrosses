@@ -1,6 +1,6 @@
 package com.fwb.noughtsAndCrosses.model;
 
-public class Player extends Field {
+public class Player {
 
     private final String name;
 
