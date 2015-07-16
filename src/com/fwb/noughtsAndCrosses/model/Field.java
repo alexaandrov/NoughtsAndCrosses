@@ -61,15 +61,15 @@ public class Field {
             while ((coordinate < MIN_FIELD_NUMBER || coordinate > MAX_FIELD_NUMBER) || coordinate < findStepCoordinate(coordinate)) {
                 coordinate = consoleView.askPlayerCoordinate(player);
             }
-            saveStepCoordinate(coordinate);
             findAndPutCoordinate(coordinate, player);
         } else {
-            saveStepCoordinate(coordinate);
             findAndPutCoordinate(coordinate, player);
         }
     }
 
+
     private void findAndPutCoordinate(int coordinate, Player player) {
+        saveStepCoordinate(coordinate);
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
                 if (field[lineNumber][cellNumber] == NUMBER_ONE_IN_THE_ASCII - 1 + coordinate) {
