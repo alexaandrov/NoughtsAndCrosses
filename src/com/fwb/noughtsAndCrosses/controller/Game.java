@@ -3,6 +3,7 @@ package com.fwb.noughtsAndCrosses.controller;
 import java.io.IOException;
 import java.util.Random;
 import com.fwb.noughtsAndCrosses.model.Player;
+import com.fwb.noughtsAndCrosses.model.Winner;
 import com.fwb.noughtsAndCrosses.view.ConsoleView;
 import com.fwb.noughtsAndCrosses.model.Field;
 
@@ -13,8 +14,6 @@ public class Game {
     private final int playersCount;
 
     private final Player[] players;
-
-    private Random rand = new Random();
 
     private final ConsoleView consoleView = new ConsoleView();
 
@@ -27,6 +26,7 @@ public class Game {
         this.players[0] = player1;
         this.players[1] = player2;
         System.out.println('\n' + players[0].getPlayerName() + " and " + players[1].getPlayerName() + " you are playing " + getGameName() + '\n');
+        Random rand = new Random();
         this.step = rand.nextInt(playersCount) % playersCount;
     }
 
@@ -35,15 +35,16 @@ public class Game {
             showScore(playersCount - 1);
             showScore(playersCount);
             Field field = new Field();
+            Winner winner = new Winner(field.getField(), players[0], players[1], 0, 3);
             field.showField();
-            while (!field.Win(players[0], players[1])) {
+            while (!winner.Win()) {
                 Player currentPlayer = selectPlayer();
                 currentPlayer.putValue(currentPlayer);
                 field.showField();
             }
-            System.out.println(field.searchWinner(players[0], players[1]) + " is win");
+            System.out.println(winner.searchWinner() + " is win");
             consoleView.printLine();
-            System.out.println("Again, y or n: ");
+            System.out.print("Again, y or n: ");
         } while (consoleView.scanChar() != 'n');
     }
 
@@ -57,7 +58,7 @@ public class Game {
     }
 
     private Player selectPlayer() {
-        if (randStep()) {
+        if (getRandStep()) {
             return players[0];
         }
         else {
@@ -65,7 +66,7 @@ public class Game {
         }
     }
 
-    private boolean randStep() {
+    private boolean getRandStep() {
         if (step == 1) {
             step = 0;
             return true;
