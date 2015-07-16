@@ -22,13 +22,13 @@ public class Field {
 
     private int iterator;
 
-    private static int[] controlStepValue;
+    private static int[] availableStepsCount;
 
     public Field() {
         createField();
         temp = 0;
         iterator = 0;
-        controlStepValue = new int[9];
+        availableStepsCount = new int[9];
     }
 
     public void createField() {
@@ -55,42 +55,45 @@ public class Field {
         System.out.println();
     }
 
-    public void putValue(Player player) {
-        int value = consoleView.askPlayerCoordinate(player);
-        if ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
-            while ((value < MIN_FIELD_NUMBER || value > MAX_FIELD_NUMBER) || value < findControlStepValue(value)) {
-                value = consoleView.askPlayerCoordinate(player);
+    public void sendCoordinate(Player player) {
+        int coordinate = consoleView.askPlayerCoordinate(player);
+        if ((coordinate < MIN_FIELD_NUMBER || coordinate > MAX_FIELD_NUMBER) || coordinate < findStepCoordinate(coordinate)) {
+            while ((coordinate < MIN_FIELD_NUMBER || coordinate > MAX_FIELD_NUMBER) || coordinate < findStepCoordinate(coordinate)) {
+                coordinate = consoleView.askPlayerCoordinate(player);
             }
-            setControlStepValue(value);
-            findAndPutValue(value, player);
+            saveStepCoordinate(coordinate);
+            findAndPutCoordinate(coordinate, player);
         } else {
-            setControlStepValue(value);
-            findAndPutValue(value, player);
+            saveStepCoordinate(coordinate);
+            findAndPutCoordinate(coordinate, player);
         }
     }
 
-    private void findAndPutValue(int value, Player player) {
+    private void findAndPutCoordinate(int coordinate, Player player) {
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
-                if (field[lineNumber][cellNumber] == NUMBER_ONE_IN_THE_ASCII - 1 + value) {
+                if (field[lineNumber][cellNumber] == NUMBER_ONE_IN_THE_ASCII - 1 + coordinate) {
                     field[lineNumber][cellNumber] = player.getFieldSymbol();
                 }
             }
         }
     }
 
-    private void setControlStepValue(int value) {
-        controlStepValue[temp] = value;
+    private void saveStepCoordinate(int value) {
+        availableStepsCount[temp] = value;
         temp++;
     }
 
-    private int findControlStepValue(int value) {
-        int somethingNumber = 11;
-        for (int i = 0; i < 9; i++) {
-            if (controlStepValue[i] == value) {
-                value = somethingNumber;
+    private int findStepCoordinate(int stepCoordinate) {
+        int firstStep = 0;
+        int lastStep = 9;
+        int somethingNumberMoreThenNine = 11;
+
+        for (int i = firstStep; i < lastStep; i++) {
+            if (availableStepsCount[i] == stepCoordinate) {
+                stepCoordinate = somethingNumberMoreThenNine;
             }
         }
-        return value;
+        return stepCoordinate;
     }
 }
