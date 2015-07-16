@@ -47,7 +47,7 @@ public class Field {
     public void showField() {
         for (int lineNumber = MIN_FIELD_SIZE; lineNumber < MAX_FIELD_SIZE; lineNumber++) {
             System.out.print(" | ");
-            for (int cellNumber = 0; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
+            for (int cellNumber = MIN_FIELD_SIZE; cellNumber < MAX_FIELD_SIZE; cellNumber++) {
                 System.out.print(field[lineNumber][cellNumber] + " | ");
             }
             System.out.println();
